@@ -1,6 +1,10 @@
 <!--
-  Never forget, on the internet,
+  On the internet,
   we exist as part of a network.
+  Thank you for creating this platform!
+
+  This code loads NetNet's source code
+  Look ma, no external JavaScript references!
 -->
 
 <script>
@@ -34,16 +38,13 @@ function addScriptsRecusivelyOnLoad(scripts){
       cancelable: true
     }));
     
-    console.log("0! We have liftoff!");
-    secondLoaderElement.innerHTML = "LOADED INTERNAL SCRIPTS! (14/14)"
-    window.utils.loadBlankSketch();
+    secondLoaderElement.innerHTML = "RELOADED INTERNAL SCRIPTS! (14/14)"
+    window.utils.loadGithub("jhancock532/netnet-recursion/main");
 
     return;
   }
   
-  console.log(scripts.length);
-  
-  secondLoaderElement.innerHTML = "LOADING INTERNAL SCRIPTS (" + (14 - scripts.length) + "/14)"
+  secondLoaderElement.innerHTML = "RELOADING INTERNAL SCRIPTS (" + (14 - scripts.length) + "/14)"
   
   let scriptURL = scripts.shift();
   
@@ -65,16 +66,11 @@ fetch('/')
 
   document.body.innerHTML += data;
   
-  console.log("Countdown to liftoff!");
-  
   loadingElement = document.getElementById("loader");
-  loadingElement.innerHTML += "<p id='secondLoader' style='position: absolute; top: 20px;'>LOADING INTERNAL SCRIPTS (0/14)</p>"
+  loadingElement.innerHTML += "<p id='secondLoader' style='position: absolute; top: 20px;'>RELOADING INTERNAL SCRIPTS (0/14)</p>"
   secondLoaderElement = document.getElementById("secondLoader");
   addScriptsRecusivelyOnLoad(scripts);
      
 });
   
 </script>
-
-
-
