@@ -1,0 +1,80 @@
+<!--
+  Never forget, on the internet,
+  we exist as part of a network.
+-->
+
+<script>
+  
+let scripts = [
+  "./Maths.js", 
+  "./Color.js",
+  "./Averigua.js", 
+  "./FileUploader.js",
+  "./netitor.min.js", 
+  "./js/libs/fuse.js",
+  "./js/libs/highlight.pack.js",
+  "./js/Convo.js",
+  "./js/Widget.js",
+  "./js/SearchBar.js",
+  "./js/Menu.js",
+  "./js/NetNet.js",
+  "./js/utils.js",
+  "./js/main.js",
+];
+  
+let loaderElement, secondLoaderElement;
+  
+function addScriptsRecusivelyOnLoad(scripts){
+  
+  if (scripts.length === 0){
+    
+    //https://stackoverflow.com/questions/9153314/manually-dispatchevent-domcontentloaded
+    window.document.dispatchEvent(new Event("DOMContentLoaded", {
+      bubbles: true,
+      cancelable: true
+    }));
+    
+    console.log("0! We have liftoff!");
+    secondLoaderElement.innerHTML = "LOADED INTERNAL SCRIPTS! (14/14)"
+    window.utils.loadBlankSketch();
+
+    return;
+  }
+  
+  console.log(scripts.length);
+  
+  secondLoaderElement.innerHTML = "LOADING INTERNAL SCRIPTS (" + (14 - scripts.length) + "/14)"
+  
+  let scriptURL = scripts.shift();
+  
+  let scriptElement = document.createElement('script');
+	scriptElement.setAttribute('src', scriptURL);
+  
+  document.body.appendChild(scriptElement);
+  
+  scriptElement.addEventListener('load', () => {
+    addScriptsRecusivelyOnLoad(scripts);
+  });
+  
+}
+  
+fetch('/')
+  .then(function(response) {
+  return response.text();
+}).then(function(data) {
+
+  document.body.innerHTML += data;
+  
+  console.log("Countdown to liftoff!");
+  
+  loadingElement = document.getElementById("loader");
+  loadingElement.innerHTML += "<p id='secondLoader' style='position: absolute; top: 20px;'>LOADING INTERNAL SCRIPTS (0/14)</p>"
+  secondLoaderElement = document.getElementById("secondLoader");
+  addScriptsRecusivelyOnLoad(scripts);
+     
+});
+  
+</script>
+
+
+
